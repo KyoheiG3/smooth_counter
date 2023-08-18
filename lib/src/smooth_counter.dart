@@ -43,10 +43,16 @@ class _SmoothCounterState extends State<SmoothCounter> {
   SmoothCounterController get controller =>
       widget.controller ?? (_controller ??= SmoothCounterController());
   final formatter = Formatter();
-  late String numberString = formatter.format(controller.count, isSeparated: widget.hasSeparator);
+  late String numberString = formatter.format(
+    controller.count,
+    isSeparated: widget.hasSeparator,
+  );
 
   void listen() {
-    final number = formatter.format(controller.count, isSeparated: widget.hasSeparator);
+    final number = formatter.format(
+      controller.count,
+      isSeparated: widget.hasSeparator,
+    );
     if (numberString.length != number.length) {
       setState(() => numberString = number);
     }
@@ -90,7 +96,9 @@ class _SmoothCounterState extends State<SmoothCounter> {
             hasSeparator: widget.hasSeparator,
             animateOnInit: widget.animateOnInit,
             textStyle: style,
-            duration: widget.controller?.duration ?? widget.duration ?? controller.duration,
+            duration: widget.controller?.duration ??
+                widget.duration ??
+                controller.duration,
             curve: widget.controller?.curve ?? widget.curve ?? controller.curve,
             controller: controller,
           ),

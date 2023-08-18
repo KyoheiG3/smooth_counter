@@ -58,7 +58,10 @@ class _CounterWheelState extends State<CounterWheel> {
           useMagnifier: true,
           childDelegate: CounterWheelChildLoopingListDelegate(
             skipFirstItem: !initialized,
-            children: List.generate(10, (i) => Text(i.toString(), style: widget.textStyle)),
+            children: List.generate(
+              10,
+              (i) => Text(i.toString(), style: widget.textStyle),
+            ),
           ),
         );
       },
@@ -66,13 +69,17 @@ class _CounterWheelState extends State<CounterWheel> {
   }
 }
 
-class CounterWheelChildLoopingListDelegate extends ListWheelChildLoopingListDelegate {
+class CounterWheelChildLoopingListDelegate
+    extends ListWheelChildLoopingListDelegate {
   CounterWheelChildLoopingListDelegate({
     this.skipFirstItem = true,
     required super.children,
   });
 
-  late final List<Widget> reversedChildren = [children[0], ...children.skip(1).toList().reversed];
+  late final List<Widget> reversedChildren = [
+    children[0],
+    ...children.skip(1).toList().reversed
+  ];
   final bool skipFirstItem;
 
   @override

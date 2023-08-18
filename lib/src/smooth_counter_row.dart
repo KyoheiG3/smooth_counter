@@ -22,7 +22,7 @@ class SmoothCounterRow extends StatefulWidget {
   final SmoothCounterController controller;
 
   @override
-  State<SmoothCounterRow> createState() => _SmoothCounterRowState();
+  State createState() => _SmoothCounterRowState();
 }
 
 class _SmoothCounterRowState extends State<SmoothCounterRow> {
@@ -44,7 +44,10 @@ class _SmoothCounterRowState extends State<SmoothCounterRow> {
 
   @override
   Widget build(BuildContext context) {
-    final number = formatter.format(widget.controller.count, isSeparated: widget.hasSeparator);
+    final number = formatter.format(
+      widget.controller.count,
+      isSeparated: widget.hasSeparator,
+    );
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -59,7 +62,8 @@ class _SmoothCounterRowState extends State<SmoothCounterRow> {
                 duration: widget.duration,
                 curve: widget.curve,
                 animateOnInit: widget.animateOnInit,
-                itemIndex: formatter.parse(number.substring(0, index + 1)).toInt(),
+                itemIndex:
+                    formatter.parse(number.substring(0, index + 1)).toInt(),
               ),
             )
           else
