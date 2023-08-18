@@ -85,7 +85,7 @@ class CounterWheelChildLoopingListDelegate
   @override
   Widget? build(BuildContext context, int index) {
     if (children.isEmpty || (index == 0 && skipFirstItem)) {
-      return null;
+      return const SizedBox.shrink();
     }
     final list = index.isNegative ? reversedChildren : children;
     return IndexedSemantics(index: index, child: list[index % children.length]);
