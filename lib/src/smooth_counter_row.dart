@@ -3,6 +3,7 @@ import 'package:smooth_counter/src/controller.dart';
 import 'package:smooth_counter/src/counter_wheel.dart';
 import 'package:smooth_counter/src/formatter.dart';
 
+/// A row of [CounterWheel]s.
 class SmoothCounterRow extends StatefulWidget {
   const SmoothCounterRow({
     super.key,
@@ -14,11 +15,23 @@ class SmoothCounterRow extends StatefulWidget {
     required this.controller,
   });
 
+  /// Whether the counter has a separator.
   final bool hasSeparator;
+
+  /// The text style of the counter.
+  /// If null, the default text style will be used.
   final TextStyle? textStyle;
+
+  /// The duration of the wheel animation.
   final Duration duration;
+
+  /// The curve of the wheel animation.
   final Curve curve;
+
+  /// Whether the wheel should animate on init.
   final bool animateOnInit;
+
+  /// The controller of the counter.
   final SmoothCounterController controller;
 
   @override

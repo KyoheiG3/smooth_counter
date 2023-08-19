@@ -5,6 +5,7 @@ import 'package:smooth_counter/src/controller.dart';
 import 'package:smooth_counter/src/formatter.dart';
 import 'package:smooth_counter/src/smooth_counter_row.dart';
 
+/// A smooth counter.
 class SmoothCounter extends StatefulWidget {
   const SmoothCounter({
     super.key,
@@ -25,13 +26,41 @@ class SmoothCounter extends StatefulWidget {
           'Either count or controller must be set to null.',
         );
 
+  /// The count of the counter.
+  /// If null, the count of the controller will be used.
+  /// If both count and controller are null, assert will be thrown.
+  /// If both count and controller are non-null also it.
   final int? count;
+
+  /// Whether the counter has a separator.
+  /// default: true
   final bool hasSeparator;
+
+  /// Whether the counter should animate on init.
+  /// default: true
   final bool animateOnInit;
+
+  /// The text style of the counter.
+  /// If null, the default text style will be used.
   final TextStyle? textStyle;
+
+  /// The duration of the wheel animation.
+  /// If null, the duration of the controller will be used.
   final Duration? duration;
+
+  /// The duration of the size animation when spreading the widget.
+  /// default: 100ms
   final Duration sizeDuration;
+
+  /// The curve of the wheel animation.
+  /// If null, the curve of the controller will be used.
   final Curve? curve;
+
+  /// The controller of the counter.
+  /// If null, a new controller will be created.
+  /// If non-null, the count of the controller will be used.
+  /// If both count and controller are null, assert will be thrown.
+  /// If both count and controller are non-null also it.
   final SmoothCounterController? controller;
 
   @override

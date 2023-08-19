@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+/// A wheel of digits.
 class CounterWheel extends StatefulWidget {
   const CounterWheel({
     super.key,
@@ -11,11 +12,23 @@ class CounterWheel extends StatefulWidget {
     required this.animateOnInit,
   });
 
+  /// The text style of the counter.
+  /// If null, the default text style will be used.
   final TextStyle? textStyle;
+
+  /// The number of digits of the counter.
   final int digits;
+
+  /// The duration of the wheel animation.
   final Duration duration;
+
+  /// The curve of the wheel animation.
   final Curve curve;
+
+  /// The index of the item to be selected.
   final int itemIndex;
+
+  /// Whether the wheel should animate on init.
   final bool animateOnInit;
 
   @override
