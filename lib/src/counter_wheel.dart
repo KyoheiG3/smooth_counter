@@ -56,7 +56,7 @@ class _CounterWheelState extends State<CounterWheel> {
           controller: controller,
           physics: const FixedExtentScrollPhysics(),
           useMagnifier: true,
-          childDelegate: CounterWheelChildLoopingListDelegate(
+          childDelegate: _CounterWheelChildLoopingListDelegate(
             skipFirstItem: !initialized,
             children: List.generate(
               10,
@@ -69,9 +69,9 @@ class _CounterWheelState extends State<CounterWheel> {
   }
 }
 
-class CounterWheelChildLoopingListDelegate
+class _CounterWheelChildLoopingListDelegate
     extends ListWheelChildLoopingListDelegate {
-  CounterWheelChildLoopingListDelegate({
+  _CounterWheelChildLoopingListDelegate({
     this.skipFirstItem = true,
     required super.children,
   });
