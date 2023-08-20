@@ -2,7 +2,7 @@
 
 Smooth Counter is a plugin that allows you to perform smooth count-ups or count-downs, just like the `Text` widget, with simple arguments.
 
-![example](https://github.com/KyoheiG3/smooth_counter/assets/5707132/87790d65-f642-4bde-9daf-3c9ad24f0e39)
+<img width="195" alt="example" src="https://github.com/KyoheiG3/smooth_counter/assets/5707132/20e90a28-c415-4e41-9f03-1201fbb86f28">
 
 ## Getting started
 
@@ -102,7 +102,7 @@ SmoothCounter(
 |    | true | false | 
 | -- | ---- | ----- |
 | result | Separated | Not separated |
-| img | ![true](https://github.com/KyoheiG3/smooth_counter/assets/5707132/afaafc1f-6cde-4b4c-8e00-73224d1d0af3) | ![false](https://github.com/KyoheiG3/smooth_counter/assets/5707132/4b6f197b-595f-430e-8ba6-d1eb5eb2b0d0) |
+| img | <img width="100" alt="true" src="https://github.com/KyoheiG3/smooth_counter/assets/5707132/141d8f95-f240-4716-875d-9ac4175f6dfe"> | <img width="90" alt="false" src="https://github.com/KyoheiG3/smooth_counter/assets/5707132/3445408d-dcbe-4852-8289-9ce279d1227f"> |
 
 ### Animation on initial display
 
@@ -118,7 +118,7 @@ SmoothCounter(
 |    | true | false | 
 | -- | ---- | ----- |
 | result | Animate | No animation |
-| img | ![true](https://github.com/KyoheiG3/smooth_counter/assets/5707132/b150619a-9b9b-4475-972a-03484b1c9a2c) | ![false](https://github.com/KyoheiG3/smooth_counter/assets/5707132/405b6630-227e-45b5-ba85-df5ff9f18706) |
+| img | ![true](https://github.com/KyoheiG3/smooth_counter/assets/5707132/445b2fa9-afc7-4aed-ba16-c7855b73be1e) | ![false](https://github.com/KyoheiG3/smooth_counter/assets/5707132/5862f4fd-2692-4389-bc89-2f80a41ce7f4) |
 
 ## License
 Smooth Counter is released under the [BSD-3-Clause License](./LICENSE).
