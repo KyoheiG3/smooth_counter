@@ -17,6 +17,8 @@ class SmoothCounter extends StatefulWidget {
     this.sizeDuration = const Duration(milliseconds: 100),
     this.curve,
     this.controller,
+    this.prefix,
+    this.suffix,
   })  : assert(
           count != null || controller != null,
           'Either count or controller must be non-null.',
@@ -62,6 +64,12 @@ class SmoothCounter extends StatefulWidget {
   /// If both count and controller are null, assert will be thrown.
   /// If both count and controller are non-null also it.
   final SmoothCounterController? controller;
+
+  /// The prefix of the counter.
+  final String? prefix;
+
+  /// The suffix of the counter.
+  final String? suffix;
 
   @override
   State<SmoothCounter> createState() => _SmoothCounterState();
@@ -111,7 +119,10 @@ class _SmoothCounterState extends State<SmoothCounter> {
         .copyWith(fontFeatures: const [FontFeature.tabularFigures()]);
 
     final painter = TextPainter(
-      text: TextSpan(text: numberString, style: style),
+      text: TextSpan(
+        text: (widget.prefix ?? '') + numberString + (widget.suffix ?? ''),
+        style: style,
+      ),
       textDirection: Directionality.of(context),
     )..layout();
 
@@ -130,6 +141,8 @@ class _SmoothCounterState extends State<SmoothCounter> {
                 controller.duration,
             curve: widget.controller?.curve ?? widget.curve ?? controller.curve,
             controller: controller,
+            prefix: widget.prefix,
+            suffix: widget.suffix,
           ),
         ),
       ),

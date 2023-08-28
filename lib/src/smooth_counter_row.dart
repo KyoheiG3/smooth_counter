@@ -13,6 +13,8 @@ class SmoothCounterRow extends StatefulWidget {
     required this.curve,
     required this.animateOnInit,
     required this.controller,
+    this.prefix,
+    this.suffix,
   });
 
   /// Whether the counter has a separator.
@@ -33,6 +35,12 @@ class SmoothCounterRow extends StatefulWidget {
 
   /// The controller of the counter.
   final SmoothCounterController controller;
+
+  /// The prefix of the counter.
+  final String? prefix;
+
+  /// The suffix of the counter.
+  final String? suffix;
 
   @override
   State createState() => _SmoothCounterRowState();
@@ -65,6 +73,8 @@ class _SmoothCounterRowState extends State<SmoothCounterRow> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
+        if (widget.prefix != null)
+          Text(widget.prefix!, style: widget.textStyle),
         for (var index = 0; index < number.length; index++)
           if (int.tryParse(number[index]) != null)
             Expanded(
@@ -81,6 +91,8 @@ class _SmoothCounterRowState extends State<SmoothCounterRow> {
             )
           else
             Text(number[index], style: widget.textStyle),
+        if (widget.suffix != null)
+          Text(widget.suffix!, style: widget.textStyle),
       ],
     );
   }
