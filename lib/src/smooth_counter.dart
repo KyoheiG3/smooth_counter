@@ -120,31 +120,46 @@ class _SmoothCounterState extends State<SmoothCounter> {
 
     final painter = TextPainter(
       text: TextSpan(
-        text: (widget.prefix ?? '') + numberString + (widget.suffix ?? ''),
+        text: numberString,
         style: style,
       ),
       textDirection: Directionality.of(context),
     )..layout();
 
     return IgnorePointer(
-      child: AnimatedSize(
-        alignment: Alignment.centerRight,
-        duration: widget.sizeDuration,
-        child: SizedBox.fromSize(
-          size: painter.size,
-          child: SmoothCounterRow(
-            hasSeparator: widget.hasSeparator,
-            animateOnInit: widget.animateOnInit,
-            textStyle: style,
-            duration: widget.controller?.duration ??
-                widget.duration ??
-                controller.duration,
-            curve: widget.controller?.curve ?? widget.curve ?? controller.curve,
-            controller: controller,
-            prefix: widget.prefix,
-            suffix: widget.suffix,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (widget.prefix != null)
+            Text(
+              widget.prefix!,
+              style: style,
+            ),
+          AnimatedSize(
+            alignment: Alignment.centerRight,
+            duration: widget.sizeDuration,
+            child: SizedBox.fromSize(
+              size: painter.size,
+              child: SmoothCounterRow(
+                hasSeparator: widget.hasSeparator,
+                animateOnInit: widget.animateOnInit,
+                textStyle: style,
+                duration: widget.controller?.duration ??
+                    widget.duration ??
+                    controller.duration,
+                curve: widget.controller?.curve ??
+                    widget.curve ??
+                    controller.curve,
+                controller: controller,
+              ),
+            ),
           ),
-        ),
+          if (widget.suffix != null)
+            Text(
+              widget.suffix!,
+              style: style,
+            ),
+        ],
       ),
     );
   }
