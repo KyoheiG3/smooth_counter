@@ -17,6 +17,8 @@ class SmoothCounter extends StatefulWidget {
     this.sizeDuration = const Duration(milliseconds: 100),
     this.curve,
     this.controller,
+    this.prefix,
+    this.suffix,
   })  : assert(
           count != null || controller != null,
           'Either count or controller must be non-null.',
@@ -62,6 +64,12 @@ class SmoothCounter extends StatefulWidget {
   /// If both count and controller are null, assert will be thrown.
   /// If both count and controller are non-null also it.
   final SmoothCounterController? controller;
+
+  /// The prefix of the counter.
+  final String? prefix;
+
+  /// The suffix of the counter.
+  final String? suffix;
 
   @override
   State<SmoothCounter> createState() => _SmoothCounterState();
@@ -111,27 +119,47 @@ class _SmoothCounterState extends State<SmoothCounter> {
         .copyWith(fontFeatures: const [FontFeature.tabularFigures()]);
 
     final painter = TextPainter(
-      text: TextSpan(text: numberString, style: style),
+      text: TextSpan(
+        text: numberString,
+        style: style,
+      ),
       textDirection: Directionality.of(context),
     )..layout();
 
     return IgnorePointer(
-      child: AnimatedSize(
-        alignment: Alignment.centerRight,
-        duration: widget.sizeDuration,
-        child: SizedBox.fromSize(
-          size: painter.size,
-          child: SmoothCounterRow(
-            hasSeparator: widget.hasSeparator,
-            animateOnInit: widget.animateOnInit,
-            textStyle: style,
-            duration: widget.controller?.duration ??
-                widget.duration ??
-                controller.duration,
-            curve: widget.controller?.curve ?? widget.curve ?? controller.curve,
-            controller: controller,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (widget.prefix != null)
+            Text(
+              widget.prefix!,
+              style: style,
+            ),
+          AnimatedSize(
+            alignment: Alignment.centerRight,
+            duration: widget.sizeDuration,
+            child: SizedBox.fromSize(
+              size: painter.size,
+              child: SmoothCounterRow(
+                hasSeparator: widget.hasSeparator,
+                animateOnInit: widget.animateOnInit,
+                textStyle: style,
+                duration: widget.controller?.duration ??
+                    widget.duration ??
+                    controller.duration,
+                curve: widget.controller?.curve ??
+                    widget.curve ??
+                    controller.curve,
+                controller: controller,
+              ),
+            ),
           ),
-        ),
+          if (widget.suffix != null)
+            Text(
+              widget.suffix!,
+              style: style,
+            ),
+        ],
       ),
     );
   }
