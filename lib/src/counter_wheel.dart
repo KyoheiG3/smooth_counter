@@ -91,7 +91,7 @@ class _CounterWheelChildLoopingListDelegate
 
   late final List<Widget> reversedChildren = [
     children[0],
-    ...children.skip(1).toList().reversed
+    ...children.skip(1).toList().reversed,
   ];
   final bool skipFirstItem;
 

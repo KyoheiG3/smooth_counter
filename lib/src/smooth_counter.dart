@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/widgets.dart';
 import 'package:smooth_counter/src/controller.dart';
 import 'package:smooth_counter/src/formatter.dart';
