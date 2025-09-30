@@ -39,7 +39,7 @@ class _CounterWheelState extends State<CounterWheel> {
   late final controller = FixedExtentScrollController(
     initialItem: widget.animateOnInit ? 0 : widget.itemIndex,
   );
-  late bool initialized = widget.digits == 1 || !widget.animateOnInit;
+  late bool skipFirstItem = widget.digits > 1 && widget.animateOnInit;
   int? selectedItem;
 
   @override
@@ -58,7 +58,7 @@ class _CounterWheelState extends State<CounterWheel> {
           duration: widget.duration,
           curve: widget.curve,
         );
-        initialized = true;
+        skipFirstItem = false;
       }
     });
 
@@ -70,7 +70,7 @@ class _CounterWheelState extends State<CounterWheel> {
           physics: const FixedExtentScrollPhysics(),
           useMagnifier: true,
           childDelegate: _CounterWheelChildLoopingListDelegate(
-            skipFirstItem: !initialized,
+            skipFirstItem: skipFirstItem,
             children: List.generate(
               10,
               (i) => Text(i.toString(), style: widget.textStyle),

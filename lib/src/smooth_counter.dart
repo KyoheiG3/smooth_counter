@@ -1,14 +1,13 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:smooth_counter/src/controller.dart';
-import 'package:smooth_counter/src/formatter.dart';
 import 'package:smooth_counter/src/smooth_counter_row.dart';
 
 /// A smooth counter.
 class SmoothCounter extends StatefulWidget {
-  const SmoothCounter({
+  SmoothCounter({
     super.key,
     this.count,
-    this.hasSeparator = true,
     this.animateOnInit = true,
     this.textStyle,
     this.duration,
@@ -17,24 +16,27 @@ class SmoothCounter extends StatefulWidget {
     this.controller,
     this.prefix,
     this.suffix,
-  })  : assert(
-          count != null || controller != null,
-          'Either count or controller must be non-null.',
-        ),
-        assert(
-          count == null || controller == null,
-          'Either count or controller must be set to null.',
-        );
+    String? formatString,
+    NumberFormat? format,
+  }) : assert(
+         count != null || controller != null,
+         'Either count or controller must be non-null.',
+       ),
+       assert(
+         count == null || controller == null,
+         'Either count or controller must be set to null.',
+       ),
+       assert(
+         format == null || formatString == null,
+         'Either format or formatString must be set to null.',
+       ),
+       format = format ?? NumberFormat(formatString);
 
   /// The count of the counter.
   /// If null, the count of the controller will be used.
   /// If both count and controller are null, assert will be thrown.
   /// If both count and controller are non-null also it.
-  final int? count;
-
-  /// Whether the counter has a separator.
-  /// default: true
-  final bool hasSeparator;
+  final num? count;
 
   /// Whether the counter should animate on init.
   /// default: true
@@ -69,6 +71,11 @@ class SmoothCounter extends StatefulWidget {
   /// The suffix of the counter.
   final String? suffix;
 
+  /// The number format for the counter.
+  /// Used to format the count value into a string representation.
+  /// Can be specified using either [format] or [formatString] parameter.
+  final NumberFormat format;
+
   @override
   State<SmoothCounter> createState() => _SmoothCounterState();
 }
@@ -77,17 +84,10 @@ class _SmoothCounterState extends State<SmoothCounter> {
   SmoothCounterController? _controller;
   SmoothCounterController get controller =>
       widget.controller ?? (_controller ??= SmoothCounterController());
-  final formatter = Formatter();
-  late String numberString = formatter.format(
-    controller.count,
-    isSeparated: widget.hasSeparator,
-  );
+  late String numberString = widget.format.format(controller.count);
 
   void listen() {
-    final number = formatter.format(
-      controller.count,
-      isSeparated: widget.hasSeparator,
-    );
+    final number = widget.format.format(controller.count);
     if (numberString.length != number.length) {
       setState(() => numberString = number);
     }
@@ -117,10 +117,7 @@ class _SmoothCounterState extends State<SmoothCounter> {
         .copyWith(fontFeatures: const [FontFeature.tabularFigures()]);
 
     final painter = TextPainter(
-      text: TextSpan(
-        text: numberString,
-        style: style,
-      ),
+      text: TextSpan(text: numberString, style: style),
       textDirection: Directionality.of(context),
     )..layout();
 
@@ -128,35 +125,29 @@ class _SmoothCounterState extends State<SmoothCounter> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (widget.prefix != null)
-            Text(
-              widget.prefix!,
-              style: style,
-            ),
+          if (widget.prefix != null) Text(widget.prefix!, style: style),
           AnimatedSize(
             alignment: Alignment.centerRight,
             duration: widget.sizeDuration,
             child: SizedBox.fromSize(
               size: painter.size,
               child: SmoothCounterRow(
-                hasSeparator: widget.hasSeparator,
                 animateOnInit: widget.animateOnInit,
                 textStyle: style,
-                duration: widget.controller?.duration ??
+                duration:
+                    widget.controller?.duration ??
                     widget.duration ??
                     controller.duration,
-                curve: widget.controller?.curve ??
+                curve:
+                    widget.controller?.curve ??
                     widget.curve ??
                     controller.curve,
                 controller: controller,
+                format: widget.format,
               ),
             ),
           ),
-          if (widget.suffix != null)
-            Text(
-              widget.suffix!,
-              style: style,
-            ),
+          if (widget.suffix != null) Text(widget.suffix!, style: style),
         ],
       ),
     );

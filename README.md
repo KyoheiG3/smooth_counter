@@ -9,8 +9,8 @@ Smooth Counter is a plugin that allows you to perform smooth count-ups or count-
 Add `smooth_counter` to your `pubspec.yaml` file.
 
 ## Requirements
-- Dart 3.0.0+
-- flutter 3.10.0+
+- Dart 3.8.0+
+- Flutter 3.32.0+
 
 ## Usage
 
@@ -18,15 +18,15 @@ You can either pass `count` directly to the widget or use a `controller`.
 
 ### Using count
 
-This is the simplest method. Just pass an int variable and the animation will be performed.
+This is the simplest method. Just pass a number (int or double) and the animation will be performed.
 
 ```dart
 class _CounterState extends State<MyHomePage> {
-  int _counter = 0;
+  double _counter = 0;
 
   void _incrementCounter() {
     setState(() {
-      _counter += 100;
+      _counter += 100.5;
     });
   }
 
@@ -37,6 +37,7 @@ class _CounterState extends State<MyHomePage> {
       children: [
         SmoothCounter(
           count: _counter,
+          formatString: '#,##0.00',
           textStyle: Theme.of(context).textTheme.headlineMedium,
         ),
         FilledButton(
@@ -88,21 +89,52 @@ class _CounterState extends State<MyHomePage> {
 }
 ```
 
-### Separator
+### Number Formatting
 
-It is possible to set whether to show separators for numbers. default is true,
+You can customize the number format using `formatString` or `format` parameter. By default, numbers are displayed with thousand separators.
+
+```dart
+// Default: with thousand separators
+SmoothCounter(
+  count: _counter,
+),
+
+// Two decimal places
+SmoothCounter(
+  count: _counter,
+  formatString: '#,##0.00',
+),
+
+// Without separators
+SmoothCounter(
+  count: _counter,
+  formatString: '0',
+),
+
+// Custom format using NumberFormat
+SmoothCounter(
+  count: _counter,
+  format: NumberFormat.currency(symbol: '\$'),
+),
+```
+
+|    | With separator | Without separator |
+| -- | ---- | ----- |
+| result | Separated | Not separated |
+| img | <img width="100" alt="true" src="https://github.com/KyoheiG3/smooth_counter/assets/5707132/141d8f95-f240-4716-875d-9ac4175f6dfe"> | <img width="90" alt="false" src="https://github.com/KyoheiG3/smooth_counter/assets/5707132/3445408d-dcbe-4852-8289-9ce279d1227f"> |
+
+### Prefix and Suffix
+
+You can add text before or after the counter value.
 
 ```dart
 SmoothCounter(
   count: _counter,
-  hasSeparator: false, // or true
+  prefix: '\$',
+  suffix: ' USD',
+  textStyle: Theme.of(context).textTheme.headlineMedium,
 ),
 ```
-
-|    | true | false | 
-| -- | ---- | ----- |
-| result | Separated | Not separated |
-| img | <img width="100" alt="true" src="https://github.com/KyoheiG3/smooth_counter/assets/5707132/141d8f95-f240-4716-875d-9ac4175f6dfe"> | <img width="90" alt="false" src="https://github.com/KyoheiG3/smooth_counter/assets/5707132/3445408d-dcbe-4852-8289-9ce279d1227f"> |
 
 ### Animation on initial display
 
