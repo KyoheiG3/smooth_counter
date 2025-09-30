@@ -1,6 +1,7 @@
 name: smooth_counter
 description: A Flutter package that is a smooth running counter widget.
-version: 0.3.0
+version: 1.0.0
+homepage: https://github.com/KyoheiG3/smooth_counter
 repository: https://github.com/KyoheiG3/smooth_counter
 documentation: https://github.com/KyoheiG3/smooth_counter
 issue_tracker: https://github.com/KyoheiG3/smooth_counter/issues
