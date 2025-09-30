@@ -32,11 +32,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  double _counter = 0;
 
   void _incrementCounter() {
     setState(() {
-      _counter += 100;
+      _counter += 10.13;
     });
   }
 
@@ -51,12 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            const Text('You have pushed the button this many times:'),
             SmoothCounter(
               count: _counter,
               textStyle: Theme.of(context).textTheme.headlineMedium,
+              formatString: '#,##0.00',
             ),
           ],
         ),
