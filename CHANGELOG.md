@@ -1,3 +1,37 @@
+## 1.0.0
+
+### Breaking Changes
+
+- **BREAKING**: Removed `hasSeparator` parameter. Use `format` or `formatString` parameters instead for more flexible number formatting control.
+
+  Migration guide:
+  ```dart
+  // Before
+  SmoothCounter(count: 1234, hasSeparator: false)
+
+  // After
+  SmoothCounter(count: 1234, formatString: '0')
+  ```
+
+### Features
+
+- **feat**: Added `format` parameter to accept `NumberFormat` instances for custom number formatting
+- **feat**: Added `formatString` parameter to specify number format patterns (e.g., `'#,##0.00'`, `'0'`)
+- **feat**: Support both `int` and `double` types for the `count` parameter
+
+### Improvements
+
+- **refactor**: Replaced internal `Formatter` class with direct `NumberFormat` integration from `intl` package
+- **refactor**: Removed unnecessary library declaration
+
+### Documentation
+
+- **docs**: Updated README with comprehensive number formatting examples
+- **docs**: Added documentation for `format` parameter in `SmoothCounter` and `SmoothCounterRow`
+- **docs**: Updated requirements to Dart 3.8.0+ and Flutter 3.32.0+
+- **docs**: Added prefix/suffix feature documentation
+- **docs**: Changed examples to use `double` type to demonstrate decimal support
+
 ## 0.3.0
 
 ### Dependencies
