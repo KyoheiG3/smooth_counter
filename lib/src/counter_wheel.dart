@@ -73,7 +73,7 @@ class _CounterWheelState extends State<CounterWheel> {
             skipFirstItem: skipFirstItem,
             children: List.generate(
               10,
-              (i) => Text(i.toString(), style: widget.textStyle),
+              (i) => Center(child: Text(i.toString(), style: widget.textStyle)),
             ),
           ),
         );
