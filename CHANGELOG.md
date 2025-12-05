@@ -1,3 +1,9 @@
+## 1.1.0
+
+### Features
+
+- **feat**: Added `verticalPadding` parameter to control vertical padding of the counter widget ([#10](https://github.com/KyoheiG3/smooth_counter/pull/10))
+
 ## 1.0.0
 
 ### Breaking Changes
