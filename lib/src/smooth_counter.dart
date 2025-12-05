@@ -8,6 +8,7 @@ class SmoothCounter extends StatefulWidget {
   SmoothCounter({
     super.key,
     this.count,
+    this.verticalPadding,
     this.animateOnInit = true,
     this.textStyle,
     this.duration,
@@ -37,6 +38,10 @@ class SmoothCounter extends StatefulWidget {
   /// If both count and controller are null, assert will be thrown.
   /// If both count and controller are non-null also it.
   final num? count;
+
+  /// The vertical padding of the counter.
+  /// If null, the counter will not have vertical padding.
+  final double? verticalPadding;
 
   /// Whether the counter should animate on init.
   /// default: true
@@ -130,7 +135,12 @@ class _SmoothCounterState extends State<SmoothCounter> {
             alignment: Alignment.centerRight,
             duration: widget.sizeDuration,
             child: SizedBox.fromSize(
-              size: painter.size,
+              size: widget.verticalPadding != null
+                  ? Size(
+                      painter.size.width,
+                      painter.size.height + widget.verticalPadding! * 2,
+                    )
+                  : painter.size,
               child: SmoothCounterRow(
                 animateOnInit: widget.animateOnInit,
                 textStyle: style,
